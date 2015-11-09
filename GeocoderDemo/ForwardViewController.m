@@ -2,7 +2,7 @@
      File: ForwardViewController.m 
  Abstract: View controller in charge of forward geocoding.
   
-  Version: 1.1 
+  Version: 1.2 
   
  Disclaimer: IMPORTANT:  This Apple software is supplied to you by Apple 
  Inc. ("Apple") in consideration of your agreement to the following 
@@ -42,7 +42,7 @@
  STRICT LIABILITY OR OTHERWISE, EVEN IF APPLE HAS BEEN ADVISED OF THE 
  POSSIBILITY OF SUCH DAMAGE. 
   
- Copyright (C) 2011 Apple Inc. All Rights Reserved. 
+ Copyright (C) 2012 Apple Inc. All Rights Reserved. 
   
  */
 
@@ -50,28 +50,25 @@
 #import "PlacemarksListViewController.h"
 
 @interface ForwardViewController ()
-{
-@private
-    UITableViewCell *_searchStringCell;
-    UITextField *_searchStringTextField;
-    
-    UISwitch *_searchHintSwitch;
-        
-    CLLocationManager *_locationManager; // location manager for current location
-    CLLocationCoordinate2D _selectedCoordinate; //used to store the users selection
-    
-    UITableViewCell *_searchRadiusCell;
-    UILabel *_searchRadiusLabel;
-    UISlider *_searchRadiusSlider;
-    
-    UIActivityIndicatorView *_spinner; // weak
-    UIActivityIndicatorView *_currentLocationActivityIndicatorView; // weak
-}
+
+@property (nonatomic, strong) CLLocationManager *locationManager; // location manager for current location
+
+@property (nonatomic, strong) IBOutlet UITableViewCell *searchStringCell;
+@property (nonatomic, strong) IBOutlet UITextField *searchStringTextField;
+
+@property (nonatomic, strong) IBOutlet UISwitch *searchHintSwitch;
+
+@property (nonatomic, strong) IBOutlet UITableViewCell *searchRadiusCell;
+@property (nonatomic, strong) IBOutlet UILabel *searchRadiusLabel;
+@property (nonatomic, strong) IBOutlet UISlider *searchRadiusSlider;
 
 @property (readonly) CLLocationCoordinate2D selectedCoordinate;
 
-@property (readonly) UIActivityIndicatorView *spinner;  
-@property (readonly) UIActivityIndicatorView *currentLocationActivityIndicatorView;
+@property (readonly) UIActivityIndicatorView *spinner; // weak
+@property (readonly) UIActivityIndicatorView *currentLocationActivityIndicatorView; // weak
+
+- (IBAction)hintSwitchChanged:(id)sender;
+- (IBAction)radiusChanged:(id)sender;
 
 @end
 
@@ -94,6 +91,7 @@
 @synthesize spinner = _spinner;
 @synthesize currentLocationActivityIndicatorView = _currentLocationActivityIndicatorView;
 
+@synthesize locationManager = _locationManager;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -173,7 +171,7 @@
     _locationManager.delegate = nil;
     [_locationManager release];
     
-    [super release];
+    [super dealloc];
 }
 
 

@@ -1,7 +1,7 @@
 /*
      File: PlacemarkViewController.h
  Abstract: UITableViewController that displays the propeties of a CLPlacemark.
-  Version: 1.1
+  Version: 1.2
  
  Disclaimer: IMPORTANT:  This Apple software is supplied to you by Apple
  Inc. ("Apple") in consideration of your agreement to the following
@@ -41,7 +41,7 @@
  STRICT LIABILITY OR OTHERWISE, EVEN IF APPLE HAS BEEN ADVISED OF THE
  POSSIBILITY OF SUCH DAMAGE.
  
- Copyright (C) 2011 Apple Inc. All Rights Reserved.
+ Copyright (C) 2012 Apple Inc. All Rights Reserved.
  
  */
 
@@ -57,7 +57,7 @@ extern NSInteger const PlacemarkViewControllerNumberOfSections;
     BOOL _preferCoord;
 }
 
-@property (nonatomic, retain) CLPlacemark *placemark;
+@property (nonatomic, strong) CLPlacemark *placemark;
 
 // designated initilizers
 - (id)initWithPlacemark:(CLPlacemark*)placemark preferCoord:(BOOL)shouldPreferCoord; // show the map and coord. above the address info.

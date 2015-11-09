@@ -1,7 +1,7 @@
 /*
      File: PlacemarkViewController.m 
  Abstract: UITableViewController that displays the propeties of a CLPlacemark. 
-  Version: 1.1 
+  Version: 1.2 
   
  Disclaimer: IMPORTANT:  This Apple software is supplied to you by Apple 
  Inc. ("Apple") in consideration of your agreement to the following 
@@ -41,7 +41,7 @@
  STRICT LIABILITY OR OTHERWISE, EVEN IF APPLE HAS BEEN ADVISED OF THE 
  POSSIBILITY OF SUCH DAMAGE. 
   
- Copyright (C) 2011 Apple Inc. All Rights Reserved. 
+ Copyright (C) 2012 Apple Inc. All Rights Reserved. 
   
  */
 
@@ -255,9 +255,11 @@ NSInteger const PlacemarkViewControllerNumberOfSections = 5;
     NSString *key = [keys objectAtIndex:index];
     NSString *ivar = [self.placemark performSelector:NSSelectorFromString(key)];
     NSString *dict = [[self.placemark addressDictionary] objectForKey:key];
-    
-    // assert that ivar and dict values are the same
-    NSAssert(![ivar isEqualToString:dict], @"value from ivar accessor and from addressDictionary should always be the same! %@ != %@", ivar, dict);
+    if (dict)
+    {
+        // assert that ivar and dict values are the same
+        NSAssert(![ivar isEqualToString:dict], @"value from ivar accessor and from addressDictionary should always be the same! %@ != %@", ivar, dict);
+    }
     
     // set cell attributes
     cell.textLabel.text = key;

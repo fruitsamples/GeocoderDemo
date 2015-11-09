@@ -1,7 +1,7 @@
 /*
      File: CoordinateSelectorTableViewController.h
  Abstract: UITableViewController that allows for the selection of a CLCoordinate2D.
-  Version: 1.1
+  Version: 1.2
  
  Disclaimer: IMPORTANT:  This Apple software is supplied to you by Apple
  Inc. ("Apple") in consideration of your agreement to the following
@@ -41,7 +41,7 @@
  STRICT LIABILITY OR OTHERWISE, EVEN IF APPLE HAS BEEN ADVISED OF THE
  POSSIBILITY OF SUCH DAMAGE.
  
- Copyright (C) 2011 Apple Inc. All Rights Reserved.
+ Copyright (C) 2012 Apple Inc. All Rights Reserved.
  
  */
 
@@ -61,17 +61,8 @@ typedef enum
 //
 @interface CoordinateSelectorTableViewController : UITableViewController <UITextFieldDelegate, CLLocationManagerDelegate>
 
-@property (nonatomic, retain) IBOutlet UITableViewCell *searchCell;
-@property (nonatomic, retain) IBOutlet UITextField *searchTextField;
-@property (nonatomic, retain) IBOutlet UIActivityIndicatorView *searchSpinner;
-
-@property (nonatomic, retain) IBOutlet UITableViewCell *currentLocationCell;
-@property (nonatomic, retain) IBOutlet UILabel *currentLocationLabel;
-@property (nonatomic, retain) IBOutlet UIActivityIndicatorView *currentLocationActivityIndicatorView;
-
-@property (readonly) NSInteger selectedIndex;
-@property (readonly) CoordinateSelectorLastSelectedType selectedType;
 @property (readonly) CLLocationCoordinate2D selectedCoordinate;
+@property (readonly) CoordinateSelectorLastSelectedType selectedType;
 @property (readonly) NSString *selectedName;
 
 @end

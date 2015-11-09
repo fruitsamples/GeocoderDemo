@@ -1,7 +1,7 @@
 /*
      File: CoordinateSelectorTableViewController.m 
  Abstract: UITableViewController that allows for the selection of a CLCoordinate2D. 
-  Version: 1.1 
+  Version: 1.2 
   
  Disclaimer: IMPORTANT:  This Apple software is supplied to you by Apple 
  Inc. ("Apple") in consideration of your agreement to the following 
@@ -41,7 +41,7 @@
  STRICT LIABILITY OR OTHERWISE, EVEN IF APPLE HAS BEEN ADVISED OF THE 
  POSSIBILITY OF SUCH DAMAGE. 
   
- Copyright (C) 2011 Apple Inc. All Rights Reserved. 
+ Copyright (C) 2012 Apple Inc. All Rights Reserved. 
   
  */
 
@@ -51,31 +51,25 @@
 #import <AddressBookUI/AddressBookUI.h>
 
 
-#pragma mark - Private Category
+#pragma mark -
 
 @interface CoordinateSelectorTableViewController ()
-{
-@private
-    NSArray *_searchPlacemarksCache; // an array of CLPlacemarks returned by the last search
-    
-    CLLocationManager *_locationManager; // location manager for current location.
-    
-    CoordinateSelectorLastSelectedType _selectedType; //used to store the users section Type
-    NSInteger _selectedIndex; //used to store the users regular location selection
-    CLLocationCoordinate2D _selectedCoordinate; //used to store the users selection
-    NSString* _selectedName; //used to store the users selection
-    
-    NSIndexPath *_checkedIndexPath; //used to store the users overall selection
-    
-    // custom nib cells
-    UITableViewCell *_searchCell;
-    UITextField *_searchTextField;
-    UIActivityIndicatorView *_searchSpinner;
-    
-    UITableViewCell *_currentLocationCell;
-    UILabel *_currentLocationLabel;
-    UIActivityIndicatorView *_currentLocationActivityIndicatorView;
-}
+
+@property (nonatomic, strong) NSArray *searchPlacemarksCache;
+
+@property (nonatomic, strong) CLLocationManager *locationManager;
+
+@property (nonatomic, strong) NSIndexPath *checkedIndexPath;
+
+@property (nonatomic, strong) IBOutlet UITableViewCell *searchCell;
+@property (nonatomic, strong) IBOutlet UITextField *searchTextField;
+@property (nonatomic, strong) IBOutlet UIActivityIndicatorView *searchSpinner;
+
+@property (nonatomic, strong) IBOutlet UITableViewCell *currentLocationCell;
+@property (nonatomic, strong) IBOutlet UILabel *currentLocationLabel;
+@property (nonatomic, strong) IBOutlet UIActivityIndicatorView *currentLocationActivityIndicatorView;
+
+@property (readonly) NSInteger selectedIndex;
 
 // setup
 - (void)loadNibCells;
@@ -96,10 +90,14 @@
 
 @implementation CoordinateSelectorTableViewController
 
+@synthesize searchPlacemarksCache = _searchPlacemarksCache;
+
+@synthesize locationManager = _locationManager;
 @synthesize selectedIndex = _selectedIndex;
 @synthesize selectedType = _selectedType;
 @synthesize selectedCoordinate = _selectedCoordinate;
 @synthesize selectedName = _selectedName;
+@synthesize checkedIndexPath = _checkedIndexPath;
 
 // custom nib cells
 @synthesize searchCell = _searchCell;

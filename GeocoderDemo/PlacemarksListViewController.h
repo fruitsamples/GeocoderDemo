@@ -1,7 +1,7 @@
 /*
      File: PlacemarksListViewController.h
  Abstract: UITableViewController that Displays a list of CLPlacemarks.
-  Version: 1.1
+  Version: 1.2
  
  Disclaimer: IMPORTANT:  This Apple software is supplied to you by Apple
  Inc. ("Apple") in consideration of your agreement to the following
@@ -41,7 +41,7 @@
  STRICT LIABILITY OR OTHERWISE, EVEN IF APPLE HAS BEEN ADVISED OF THE
  POSSIBILITY OF SUCH DAMAGE.
  
- Copyright (C) 2011 Apple Inc. All Rights Reserved.
+ Copyright (C) 2012 Apple Inc. All Rights Reserved.
  
  */
 
@@ -54,7 +54,7 @@
     BOOL _preferCoord;
 }
 
-@property (nonatomic, retain) NSArray *placemarks;
+@property (nonatomic, strong) NSArray *placemarks;
 
 // designated initilizers
 - (id)initWithPlacemarks:(NSArray*)placemarks preferCoord:(BOOL)shouldPreferCoord; // show the coord in the main textField in the cell if YES

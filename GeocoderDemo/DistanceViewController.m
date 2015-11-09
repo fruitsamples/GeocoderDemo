@@ -2,7 +2,7 @@
      File: DistanceViewController.m 
  Abstract: View controller in charge of measuring distance between 2 locations.
   
-  Version: 1.1 
+  Version: 1.2 
   
  Disclaimer: IMPORTANT:  This Apple software is supplied to you by Apple 
  Inc. ("Apple") in consideration of your agreement to the following 
@@ -42,7 +42,7 @@
  STRICT LIABILITY OR OTHERWISE, EVEN IF APPLE HAS BEEN ADVISED OF THE 
  POSSIBILITY OF SUCH DAMAGE. 
   
- Copyright (C) 2011 Apple Inc. All Rights Reserved. 
+ Copyright (C) 2012 Apple Inc. All Rights Reserved. 
   
  */
 
@@ -52,14 +52,9 @@
 #import "PlacemarksListViewController.h"
 
 
-#pragma mark - Private Category
+#pragma mark -
 
 @interface DistanceViewController ()
-{
-@private
-    CoordinateSelectorTableViewController *_toCoordinateSelector; 
-    CoordinateSelectorTableViewController *_fromCoordinateSelector;
-}
 
 @property (readonly) CoordinateSelectorTableViewController *toCoordinateSelector;  
 @property (readonly) CoordinateSelectorTableViewController *fromCoordinateSelector;  

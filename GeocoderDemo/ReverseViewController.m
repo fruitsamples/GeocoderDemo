@@ -2,7 +2,7 @@
      File: ReverseViewController.m 
  Abstract: View controller in charge of reverse geocoding.
   
-  Version: 1.1 
+  Version: 1.2 
   
  Disclaimer: IMPORTANT:  This Apple software is supplied to you by Apple 
  Inc. ("Apple") in consideration of your agreement to the following 
@@ -42,30 +42,24 @@
  STRICT LIABILITY OR OTHERWISE, EVEN IF APPLE HAS BEEN ADVISED OF THE 
  POSSIBILITY OF SUCH DAMAGE. 
   
- Copyright (C) 2011 Apple Inc. All Rights Reserved. 
+ Copyright (C) 2012 Apple Inc. All Rights Reserved. 
   
  */
 
 #import "ReverseViewController.h"
 #import "PlacemarksListViewController.h"
 
+#define kSanFranciscoCoordinate CLLocationCoordinate2DMake(37.776278, -122.419367)
+
 @interface ReverseViewController ()
-{
-@private
-    CLLocationManager *_locationManager; // location manager for current location
-    CLLocationCoordinate2D _currentUserCoordinate; // used to store the users selection
-    
-    NSInteger _selectedRow;
-    
-    UIActivityIndicatorView *_spinner; // weak
-    UIActivityIndicatorView *_currentLocationActivityIndicatorView; // weak
-}
+
+@property (nonatomic, strong) CLLocationManager *locationManager;
 
 @property (readonly) CLLocationCoordinate2D currentUserCoordinate;
 @property (readonly) NSInteger selectedRow;
 
-@property (readonly) UIActivityIndicatorView *spinner;  
-@property (readonly) UIActivityIndicatorView *currentLocationActivityIndicatorView;
+@property (readonly) UIActivityIndicatorView *spinner; // weak
+@property (readonly) UIActivityIndicatorView *currentLocationActivityIndicatorView; // weak
 
 @end
 
@@ -74,14 +68,13 @@
 
 @implementation ReverseViewController
 
+@synthesize locationManager = _locationManager;
+
 @synthesize currentUserCoordinate = _currentUserCoordinate;
 @synthesize selectedRow = _selectedRow;
 
 @synthesize spinner = _spinner;
 @synthesize currentLocationActivityIndicatorView = _currentLocationActivityIndicatorView;
-
-#define kSanFranciscoCoordinate CLLocationCoordinate2DMake(37.776278, -122.419367)
-
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -125,7 +118,7 @@
     _locationManager.delegate = nil;
     [_locationManager release];
     
-    [super release];
+    [super dealloc];
 }
 
 

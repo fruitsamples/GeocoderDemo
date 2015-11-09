@@ -1,7 +1,7 @@
 /*
      File: PlacemarksListViewController.m 
  Abstract: UITableViewController that Displays a list of CLPlacemarks. 
-  Version: 1.1 
+  Version: 1.2 
   
  Disclaimer: IMPORTANT:  This Apple software is supplied to you by Apple 
  Inc. ("Apple") in consideration of your agreement to the following 
@@ -41,7 +41,7 @@
  STRICT LIABILITY OR OTHERWISE, EVEN IF APPLE HAS BEEN ADVISED OF THE 
  POSSIBILITY OF SUCH DAMAGE. 
   
- Copyright (C) 2011 Apple Inc. All Rights Reserved. 
+ Copyright (C) 2012 Apple Inc. All Rights Reserved. 
   
  */
 
@@ -106,14 +106,16 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    // Return the number of sections.
+    // return the number of sections
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // Return the number of rows in the section.    
-    if (self.placemarks == nil || self.placemarks.count == 0) return 1;
+    // return the number of rows in the section.   
+    if (self.placemarks == nil || self.placemarks.count == 0)
+        return 1;
+    
     return self.placemarks.count;
 }
 
@@ -128,7 +130,7 @@
     
     if (self.placemarks == nil || self.placemarks.count == 0)
     {
-        //show a zero results cell
+        // show a zero results cell
         cell.textLabel.text = @"No Placemarks..";
     }
     else
@@ -136,12 +138,13 @@
         CLPlacemark *placemark = [self.placemarks objectAtIndex:indexPath.row];
         
         // use the AddressBook framework to create an address dictionary
-        NSString *addressString = ABCreateStringWithAddressDictionary(placemark.addressDictionary, NO);
+        //••NSString *addressString = ABCreateStringWithAddressDictionary(placemark.addressDictionary, NO);
+        NSString *addressString = CFBridgingRelease(ABCreateStringWithAddressDictionary(placemark.addressDictionary, NO));
         
         CLLocationDegrees latitude = placemark.location.coordinate.latitude;
         CLLocationDegrees longitude = placemark.location.coordinate.longitude;
         NSString *coordString = [NSString stringWithFormat:@"φ:%.4F, λ:%.4F", latitude, longitude];
-        //switch around our strings depending on our priority at init time.
+        // switch around our strings depending on our priority at init time
         cell.textLabel.text = _preferCoord ? coordString : addressString;
         cell.detailTextLabel.text = _preferCoord ? addressString : coordString;
 
